@@ -8,7 +8,7 @@ plot4 <- function() {
                 library(dplyr)
                 
                 #set working directory to my synced fork
-                setwd("/Users/yasso/Documents/Git/ExData_Plotting1")
+                #setwd("/Users/yasso/Documents/Git/ExData_Plotting1")
                 
                 files <- dir()
                 
