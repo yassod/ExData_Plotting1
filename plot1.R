@@ -5,23 +5,20 @@ plot1 <- function() {
                 #load dplyr so that we can mutate the data frame
                 library (dplyr)
                 
-                #set working directory to my synced fork
+                #set working directory to my synced fork for testing
                 #setwd("/Users/yasso/Documents/Git/Exploratory/ExData_Plotting1")
                 
                 files <- dir()
-                if (!("household_power_consumption.txt" %in% files)) {
+                if (!("household_power_consumption.zip" %in% files)) {
                         #we need to download the ZIP file and extract our dataset
                         #we will leave the text file in our working directory
-                        temp <- tempfile()
-                        download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",temp)
-                        plotme <- read.table(unz(temp, "household_power_consumption.txt"),  sep=";", header=TRUE, na.strings="?")
-                        # unz(temp, "household_power_consumption.txt")
-                        unlink(temp)
-                } else {
-                        
-                        #read the whole data file initially
-                        plotme <- read.table("household_power_consumption.txt", sep=";", header=TRUE, na.strings="?")
-                }
+                        download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip", "household_power_consumption.zip")
+                        unz("household_power_consumption.zip", "household_power_consumption.txt")
+                }        
+
+                #Note that in this dataset missing values are coded as ?.
+                #read the whole data file
+                plotme <- read.table(unz("household_power_consumption.zip", "household_power_consumption.txt"),  sep=";", header=TRUE, na.strings="?")
                 
                 #plotme2 <- mutate(plotme, Date = as.Date(Date), Time = strptime(Time, format="%H:%M:%S"))
                 #dplyr throws an error when I try to convert the Time to a POSIXlt format
